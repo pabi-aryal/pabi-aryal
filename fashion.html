@@ -39,7 +39,7 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
       max-width: 1000px;
       margin: 0 auto;
@@ -83,7 +83,10 @@
     .back:hover {
       background-color: #b2862e;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
       h1 {
         font-size: 2rem;
       }
@@ -118,12 +121,10 @@
       <p class="np">पुरै कटन कपडा, साइज ३८–४४। सुट सेट उपलब्ध छ। सम्पूर्ण नेपालभर डेलिभरी।</p>
       <p class="price">Contact for Price</p>
     </div>
-  </div>
 
-
-  <!-- ITEM 4 -->
+    <!-- ITEM 4 -->
     <div class="item">
-      <img src="f4.jpg" alt="Fashion 3">
+      <img src="f4.jpg" alt="Fashion 4">
       <p class="desc">Full cotton fabric, size 38–44. Suit set available. Delivery all over Nepal.</p>
       <p class="np">पुरै कटन कपडा, साइज ३८–४४। सुट सेट उपलब्ध छ। सम्पूर्ण नेपालभर डेलिभरी।</p>
       <p class="price">Contact for Price</p>
