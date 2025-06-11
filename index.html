@@ -5,36 +5,119 @@
   <title>PABI | Essence Finds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root{--accent:#C89B3C;--dark:#262626;--light:#fafafa;--max:1100px;}
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
-    body{background:var(--light);color:var(--dark);line-height:1.6;}
-    a{color:inherit;text-decoration:none}
+    :root {
+      --accent: #C89B3C;        /* Gold */
+      --highlight: #6A0DAD;     /* Royal purple */
+      --vibrant: #FF6347;       /* Tomato / Reddish coral */
+      --dark: #1B1B1B;
+      --light: #FDF7F0;
+      --max: 1100px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     /*--- NAV ---*/
-    header{background:var(--light);border-bottom:2px solid var(--accent);}
-    nav{max-width:var(--max);margin:auto;display:flex;justify-content:space-between;
-        align-items:center;padding:10px 20px;flex-wrap:wrap;}
-    nav .brand{font-weight:700;font-size:1.4rem;letter-spacing:.5px;}
-    nav ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap}
-    nav li a:hover{color:var(--accent)}
+    header {
+      background: var(--light);
+      border-bottom: 3px solid var(--accent);
+    }
+    nav {
+      max-width: var(--max);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+    nav .brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+      color: var(--highlight);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    nav li a:hover {
+      color: var(--vibrant);
+    }
+
     /*--- HERO ---*/
-    .hero img{width:100%;height:45vh;object-fit:cover}
+    .hero img {
+      width: 100%;
+      height: 45vh;
+      object-fit: cover;
+    }
+
     /*--- INTRO BLOCK ---*/
-    .intro{max-width:var(--max);margin:50px auto;display:flex;gap:30px;
-           align-items:center;padding:0 20px;flex-wrap:wrap}
-    .intro .text{flex:1 1 300px}
-    .intro .owner{flex:0 1 260px}
-    .intro .owner img{width:100%;border-radius:8px}
-    h1{font-size:2rem;margin-bottom:10px}
-    footer{background:var(--dark);color:var(--light);padding:18px;text-align:center;
-           margin-top:60px;font-size:.9rem}
-    @media(max-width:768px){
-      .intro{flex-direction:column-reverse;text-align:center}
-      .intro .owner{max-width:220px}
+    .intro {
+      max-width: var(--max);
+      margin: 50px auto;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+    .intro .text {
+      flex: 1 1 300px;
+    }
+    .intro .owner {
+      flex: 0 1 260px;
+    }
+    .intro .owner img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: var(--highlight);
+    }
+    p {
+      margin-bottom: 12px;
+    }
+
+    footer {
+      background: var(--dark);
+      color: var(--light);
+      padding: 18px;
+      text-align: center;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .intro {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .intro .owner {
+        max-width: 220px;
+      }
     }
   </style>
 </head>
 <body>
-  <!----- NAVIGATION ----->
+  <!-- NAVIGATION -->
   <header>
     <nav>
       <div class="brand">PABI&nbsp;|&nbsp;Essence&nbsp;Finds</div>
@@ -43,6 +126,7 @@
         <li><a href="fashion.html">Fashion</a></li>
         <li><a href="jewellery.html">Jewellery</a></li>
         <li><a href="essential-oils.html">Essential&nbsp;Oils</a></li>
+        <li><a href="beauty.html">Beauty&nbsp;Products</a></li>
         <li><a href="food-items.html">Food&nbsp;Items</a></li>
         <li><a href="idols.html">Idols</a></li>
         <li><a href="misc.html">Misc</a></li>
@@ -50,30 +134,34 @@
     </nav>
   </header>
 
-  <!----- TOP BANNER ----->
+  <!-- HERO BANNER -->
   <section class="hero">
-    <img src="banner.jpg" alt="Collage showing fashion, jewellery, oils and gourmet foods">
+    <img src="banner.jpg" alt="A collage of carefully curated essence finds">
   </section>
 
-  <!----- OWNER + INTRO ----->
+  <!-- OWNER + INTRO -->
   <section class="intro">
     <div class="text">
-      <h1>Welcome to&nbsp;PABI’s Essence Finds</h1>
+      <h1>Welcome to PABI’s Essence Finds</h1>
       <p>
-        Hand-picked fashion statements, artful jewellery, therapeutic essential oils, gourmet
-        treats, spiritual idols and delightful miscellany — curated with love by <strong>Pabi</strong>.
-        Each piece embodies elegance, sustainability and the vibrant charm of everyday life.  
-        Browse our collections and discover something that speaks to <em>your</em> essence.
+        Our journey is rooted in mini-research — led by Pabi and a passionate team — directly with
+        customers and artisans. We only showcase what resonates: unique fashion, healing oils, soulful
+        crafts, and spiritual beauty. Essence-Finds.com is not just a shop — it's a refined curation of
+        meaningful discoveries, tested with heart and purpose.
+      </p>
+      <p>
+        हाम्रो यात्राको आधार अनुसन्धानमा छ — पबीको नेतृत्वमा टिमले ग्राहक र सर्जकहरूसँग सिधा संवाद गरेर
+        मात्र चयन गरिएका वस्तुहरू प्रस्तुत गर्छ। हरेक सामग्री हाम्रो अध्ययन, माया र सौन्दर्यको
+        संयोजन हो। Essence-Finds.com केवल व्यापार होइन, तपाईको आत्मासँग मेल खाने चयनहरूको यात्रा हो।
       </p>
     </div>
     <div class="owner">
-      <img src="owner.jpg" alt="Owner Pabi wearing a chic outfit">
+      <img src="owner.jpg" alt="Pabi, the founder, wearing a glamorous outfit">
     </div>
   </section>
 
   <footer>
-    © 2025 PABI&nbsp;Essence Finds • Crafted with ✧ in Japan
+    © 2025 PABI Essence Finds • Curated with ✧ Research & Love in Japan
   </footer>
 </body>
 </html>
-
