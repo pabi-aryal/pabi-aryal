@@ -26,16 +26,18 @@
     body {
       background: var(--light);
       color: var(--dark);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .container {
       max-width: 650px;
+      width: 100%;
     }
 
     h1 {
@@ -56,12 +58,29 @@
       font-size: 1.2rem;
       color: var(--dark);
       margin-bottom: 10px;
+      line-height: 1.5;
     }
 
     .np {
       font-size: 1.1rem;
       color: #444;
       font-style: normal;
+      line-height: 1.6;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .back:hover {
+      background-color: #b2862e;
     }
 
     @media (max-width: 600px) {
@@ -69,12 +88,13 @@
         font-size: 2rem;
       }
 
-      p {
+      p, .np {
         font-size: 1rem;
       }
 
-      .np {
-        font-size: 1rem;
+      .back {
+        font-size: 0.95rem;
+        padding: 8px 16px;
       }
     }
   </style>
@@ -87,6 +107,7 @@
     <p><strong>Coming Soon with Timeless Elegance ✨</strong></p>
     <p class="np">हाम्रो कलात्मक र अर्थपूर्ण गहनाहरूको संग्रह चाँडै तपाईंमाझ आउनेछ ।</p>
     <p class="np"><strong>शुद्ध सौन्दर्य र सुरुचिपूर्ण भावनाका साथ चाँडै आउँदैछ ✨</strong></p>
+    <a class="back" href="/index.html">← Back to Home</a>
   </div>
 </body>
 </html>
