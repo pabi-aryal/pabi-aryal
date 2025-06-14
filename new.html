@@ -84,12 +84,21 @@
   <div class="gold-line"></div>
 
   <div class="grid" id="gallery"></div>
-
+  <audio id="bgmusic" hidden></audio>
   <a class="back" href="/index.html">← Back to Home</a>
 
   <script>
-    const totalItems = 16;
+    const items = [
+      '1 (1)', '1 (2)', '1 (3)', '1 (4)', '1 (5)', '1 (6)', '1 (7)',
+      '1 (8)', '1 (9)', '1 (10)', '1 (11)', '1 (12)', '1 (13)',
+      '1 (a1)', '1 (a2)', '1 (a3)', '1 (a4)', '1 (a5)', '1 (a6)'
+    ];
+
     const gallery = document.getElementById("gallery");
+    const musicTracks = [
+      'music1.mp3', 'music2.mp3', 'music3.mp3' // add more if you have
+    ];
+    const bgMusic = document.getElementById("bgmusic");
 
     function fileExists(url, callback) {
       const xhr = new XMLHttpRequest();
@@ -99,10 +108,19 @@
       xhr.send();
     }
 
-    function createImageSlideshow(baseName, div, index) {
+    function playRandomMusic() {
+      const track = musicTracks[Math.floor(Math.random() * musicTracks.length)];
+      bgMusic.src = track;
+      bgMusic.loop = false;
+      bgMusic.volume = 0.5;
+      bgMusic.play();
+      setTimeout(() => bgMusic.pause(), 30000); // stop after 30 sec
+    }
+
+    function createImageSlideshow(baseName, div, label) {
       const img = document.createElement("img");
       img.className = "media";
-      img.alt = `Item ${index}`;
+      img.alt = label;
       div.appendChild(img);
 
       const frames = [];
@@ -124,18 +142,17 @@
             } else {
               const fallback = baseName + '.jpg';
               img.src = fallback;
-              // keep it for 30 seconds (static), no loop needed
             }
+            playRandomMusic();
           }
         });
       }
     }
 
-    // Load items in ascending order from 1 (1) to 1 (16)
-    const indices = [...Array(totalItems)].map((_, i) => i + 1); // [1, 2, ..., 16]
-    indices.forEach(i => {
-      const base = `1%20%28${i}%29`; // URL-encoded: 1 (i)
-      const mp4 = `${base}.mp4`;
+    items.forEach((label, index) => {
+      const base = encodeURIComponent(label).replace(/%20/g, ' ');
+      const baseFile = label.replace(/ /g, '%20');
+      const mp4 = `${baseFile}.mp4`;
 
       const div = document.createElement("div");
       div.className = "item";
@@ -146,7 +163,7 @@
           video.className = "media";
           video.autoplay = true;
           video.loop = true;
-          video.muted = true;
+          video.controls = true;
           video.playsInline = true;
           const src = document.createElement("source");
           src.src = mp4;
@@ -154,12 +171,12 @@
           video.appendChild(src);
           div.appendChild(video);
         } else {
-          createImageSlideshow(base, div, i);
+          createImageSlideshow(baseFile, div, label);
         }
 
         const desc = document.createElement("p");
         desc.className = "desc";
-        desc.innerText = `New ${i}`;
+        desc.innerText = `New ${label}`;
         div.appendChild(desc);
 
         gallery.appendChild(div);
