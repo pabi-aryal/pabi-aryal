@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Arrivals | Essence Finds</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --accent: #C89B3C;
+      --highlight: #6A0DAD;
+      --light: #FDF7F0;
+      --dark: #1B1B1B;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    body {
+      background: var(--light);
+      color: var(--dark);
+      padding: 40px 20px 60px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: var(--highlight);
+      margin-bottom: 20px;
+    }
+    .gold-line {
+      width: 80px;
+      height: 4px;
+      background-color: var(--accent);
+      margin: 0 auto 30px;
+      border-radius: 2px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      position: relative;
+    }
+    .item img, .item video {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .desc {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .back:hover {
+      background-color: #b2862e;
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>New Arrivals</h1>
+  <div class="gold-line"></div>
+
+  <div class="grid">
+    <!-- 14 ITEMS -->
+    <!-- Template format: image, and on click, hide image and play video -->
+    <!-- Change file names as needed (n1.jpg, n1.mp4 ... n14) -->
+
+    <!-- Begin loop -->
+    <!-- Item 1 to 14 -->
+    <!-- Repeat block with appropriate numbering -->
+    <!-- Example for item 1: -->
+    <!-- You can copy and update `n1` to `n2`, ..., `n14` -->
+
+    <!-- BEGIN ITEM BLOCK -->
+    <!-- You can copy this block 14 times and change n1 to n2, ..., n14 -->
+    <!-- Start -->
+    <script>
+      function showVideo(id) {
+        document.getElementById("img-" + id).style.display = "none";
+        var video = document.getElementById("vid-" + id);
+        video.style.display = "block";
+        video.play();
+      }
+    </script>
+
+    <!-- 14 items below -->
+    ${[...Array(14)].map((_, i) => {
+      const num = i + 1;
+      return `
+      <div class="item">
+        <img id="img-n${num}" src="n${num}.jpg" alt="New ${num}" onclick="showVideo('n${num}')">
+        <video id="vid-n${num}" style="display:none;" controls>
+          <source src="n${num}.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="desc">Click image to preview video for item ${num}.</p>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <a class="back" href="/index.html">← Back to Home</a>
+</body>
+</html>
