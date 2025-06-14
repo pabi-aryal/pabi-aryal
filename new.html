@@ -46,12 +46,13 @@
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       padding: 15px;
-      position: relative;
     }
     .media {
       width: 100%;
       border-radius: 8px;
       cursor: pointer;
+      border: none;
+      display: block;
     }
     .desc {
       font-size: 1rem;
@@ -101,28 +102,30 @@
     }
 
     for (let i = 1; i <= totalItems; i++) {
-      const encodedName = `1%20%28${i}%29`;
-      const imgURL = `${encodedName}.jpg`;
-      const vidURL = `${encodedName}.mp4`;
+      const encoded = `1%20%28${i}%29`;
+      const jpg = `${encoded}.jpg`;
+      const mp4 = `${encoded}.mp4`;
 
       const div = document.createElement("div");
       div.className = "item";
 
-      fileExists(vidURL, exists => {
-        if (exists) {
+      fileExists(mp4, (videoExists) => {
+        if (videoExists) {
           const video = document.createElement("video");
           video.className = "media";
-          video.controls = true;
+          video.autoplay = true;
           video.loop = true;
-          const src = document.createElement("source");
-          src.src = vidURL;
-          src.type = "video/mp4";
-          video.appendChild(src);
+          video.muted = true; // for autoplay to work across browsers
+          video.playsInline = true;
+          const source = document.createElement("source");
+          source.src = mp4;
+          source.type = "video/mp4";
+          video.appendChild(source);
           div.appendChild(video);
         } else {
           const img = document.createElement("img");
           img.className = "media";
-          img.src = imgURL;
+          img.src = jpg;
           img.alt = `Item ${i}`;
           div.appendChild(img);
         }
