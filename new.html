@@ -49,7 +49,7 @@
       padding: 15px;
       position: relative;
     }
-    .item img, .item video {
+    .media {
       width: 100%;
       border-radius: 8px;
       cursor: pointer;
@@ -85,44 +85,67 @@
   <h1>New Arrivals</h1>
   <div class="gold-line"></div>
 
-  <div class="grid">
-    <!-- 14 ITEMS -->
-    <!-- Template format: image, and on click, hide image and play video -->
-    <!-- Change file names as needed (n1.jpg, n1.mp4 ... n14) -->
-
-    <!-- Begin loop -->
-    <!-- Item 1 to 14 -->
-    <!-- Repeat block with appropriate numbering -->
-    <!-- Example for item 1: -->
-    <!-- You can copy and update `n1` to `n2`, ..., `n14` -->
-
-    <!-- BEGIN ITEM BLOCK -->
-    <!-- You can copy this block 14 times and change n1 to n2, ..., n14 -->
-    <!-- Start -->
-    <script>
-      function showVideo(id) {
-        document.getElementById("img-" + id).style.display = "none";
-        var video = document.getElementById("vid-" + id);
-        video.style.display = "block";
-        video.play();
-      }
-    </script>
-
-    <!-- 14 items below -->
-    ${[...Array(14)].map((_, i) => {
-      const num = i + 1;
-      return `
-      <div class="item">
-        <img id="img-n${num}" src="n${num}.jpg" alt="New ${num}" onclick="showVideo('n${num}')">
-        <video id="vid-n${num}" style="display:none;" controls>
-          <source src="n${num}.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <p class="desc">Click image to preview video for item ${num}.</p>
-      </div>`;
-    }).join('')}
-  </div>
+  <div class="grid" id="gallery"></div>
 
   <a class="back" href="/index.html">← Back to Home</a>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+    const totalItems = 14;
+
+    for (let i = 1; i <= totalItems; i++) {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const img = document.createElement("img");
+      img.className = "media";
+      img.src = `1 (${i}).jpg`;
+      img.alt = `New ${i}`;
+      img.id = `img-${i}`;
+
+      const video = document.createElement("video");
+      video.className = "media";
+      video.id = `vid-${i}`;
+      video.style.display = "none";
+      video.controls = true;
+      video.loop = true;
+      const source = document.createElement("source");
+      source.src = `1 (${i}).mp4`;
+      source.type = "video/mp4";
+      video.appendChild(source);
+
+      // On image click, hide image and show video if exists
+      img.onclick = () => {
+        img.style.display = "none";
+        video.style.display = "block";
+        video.play();
+      };
+
+      // Add both elements and description
+      div.appendChild(img);
+      div.appendChild(video);
+
+      const desc = document.createElement("p");
+      desc.className = "desc";
+      desc.innerText = `Click to play item ${i}`;
+      div.appendChild(desc);
+
+      gallery.appendChild(div);
+    }
+
+    // Auto-loop images as slideshow (optional)
+    // This will cycle images in-place if no video clicked
+    let current = 1;
+    setInterval(() => {
+      for (let i = 1; i <= totalItems; i++) {
+        const img = document.getElementById(`img-${i}`);
+        const vid = document.getElementById(`vid-${i}`);
+        if (img && img.style.display !== "none") {
+          img.style.opacity = 1;
+          img.style.transition = "opacity 0.5s ease-in-out";
+        }
+      }
+    }, 3000); // Every 3 seconds
+  </script>
 </body>
 </html>
