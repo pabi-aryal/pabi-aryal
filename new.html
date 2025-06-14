@@ -12,8 +12,7 @@
       --dark: #1B1B1B;
     }
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', Arial, sans-serif;
     }
@@ -90,62 +89,52 @@
   <a class="back" href="/index.html">← Back to Home</a>
 
   <script>
-    const gallery = document.getElementById("gallery");
     const totalItems = 14;
+    const gallery = document.getElementById("gallery");
+
+    function fileExists(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('HEAD', url);
+      xhr.onload = () => callback(xhr.status >= 200 && xhr.status < 400);
+      xhr.onerror = () => callback(false);
+      xhr.send();
+    }
 
     for (let i = 1; i <= totalItems; i++) {
+      const encodedName = `1%20%28${i}%29`;
+      const imgURL = `${encodedName}.jpg`;
+      const vidURL = `${encodedName}.mp4`;
+
       const div = document.createElement("div");
       div.className = "item";
 
-      const img = document.createElement("img");
-      img.className = "media";
-      img.src = `1 (${i}).jpg`;
-      img.alt = `New ${i}`;
-      img.id = `img-${i}`;
-
-      const video = document.createElement("video");
-      video.className = "media";
-      video.id = `vid-${i}`;
-      video.style.display = "none";
-      video.controls = true;
-      video.loop = true;
-      const source = document.createElement("source");
-      source.src = `1 (${i}).mp4`;
-      source.type = "video/mp4";
-      video.appendChild(source);
-
-      // On image click, hide image and show video if exists
-      img.onclick = () => {
-        img.style.display = "none";
-        video.style.display = "block";
-        video.play();
-      };
-
-      // Add both elements and description
-      div.appendChild(img);
-      div.appendChild(video);
-
-      const desc = document.createElement("p");
-      desc.className = "desc";
-      desc.innerText = `Click to play item ${i}`;
-      div.appendChild(desc);
-
-      gallery.appendChild(div);
-    }
-
-    // Auto-loop images as slideshow (optional)
-    // This will cycle images in-place if no video clicked
-    let current = 1;
-    setInterval(() => {
-      for (let i = 1; i <= totalItems; i++) {
-        const img = document.getElementById(`img-${i}`);
-        const vid = document.getElementById(`vid-${i}`);
-        if (img && img.style.display !== "none") {
-          img.style.opacity = 1;
-          img.style.transition = "opacity 0.5s ease-in-out";
+      fileExists(vidURL, exists => {
+        if (exists) {
+          const video = document.createElement("video");
+          video.className = "media";
+          video.controls = true;
+          video.loop = true;
+          const src = document.createElement("source");
+          src.src = vidURL;
+          src.type = "video/mp4";
+          video.appendChild(src);
+          div.appendChild(video);
+        } else {
+          const img = document.createElement("img");
+          img.className = "media";
+          img.src = imgURL;
+          img.alt = `Item ${i}`;
+          div.appendChild(img);
         }
-      }
-    }, 3000); // Every 3 seconds
+
+        const desc = document.createElement("p");
+        desc.className = "desc";
+        desc.innerText = `New ${i}`;
+        div.appendChild(desc);
+
+        gallery.appendChild(div);
+      });
+    }
   </script>
 </body>
 </html>
