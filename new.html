@@ -50,8 +50,6 @@
     .media {
       width: 100%;
       border-radius: 8px;
-      cursor: pointer;
-      border: none;
       display: block;
     }
     .desc {
@@ -90,7 +88,7 @@
   <a class="back" href="/index.html">← Back to Home</a>
 
   <script>
-    const totalItems = 14;
+    const totalItems = 16;
     const gallery = document.getElementById("gallery");
 
     function fileExists(url, callback) {
@@ -101,33 +99,59 @@
       xhr.send();
     }
 
+    function createImageSlideshow(baseName, div, index) {
+      const img = document.createElement("img");
+      img.className = "media";
+      img.alt = `Item ${index}`;
+      div.appendChild(img);
+
+      const frames = [];
+      let checked = 0;
+
+      for (let j = 1; j <= 3; j++) {
+        const url = `${baseName}_${j}.jpg`;
+        fileExists(url, exists => {
+          if (exists) frames.push(url);
+          checked++;
+          if (checked === 3) {
+            if (frames.length > 0) {
+              let current = 0;
+              img.src = frames[0];
+              setInterval(() => {
+                current = (current + 1) % frames.length;
+                img.src = frames[current];
+              }, 3000);
+            } else {
+              const fallback = baseName + '.jpg';
+              img.src = fallback;
+            }
+          }
+        });
+      }
+    }
+
     for (let i = 1; i <= totalItems; i++) {
-      const encoded = `1%20%28${i}%29`;
-      const jpg = `${encoded}.jpg`;
-      const mp4 = `${encoded}.mp4`;
+      const base = `1%20%28${i}%29`; // encoded: 1 (i)
+      const mp4 = `${base}.mp4`;
 
       const div = document.createElement("div");
       div.className = "item";
 
-      fileExists(mp4, (videoExists) => {
-        if (videoExists) {
+      fileExists(mp4, hasVideo => {
+        if (hasVideo) {
           const video = document.createElement("video");
           video.className = "media";
           video.autoplay = true;
           video.loop = true;
-          video.muted = true; // for autoplay to work across browsers
+          video.muted = true;
           video.playsInline = true;
-          const source = document.createElement("source");
-          source.src = mp4;
-          source.type = "video/mp4";
-          video.appendChild(source);
+          const src = document.createElement("source");
+          src.src = mp4;
+          src.type = "video/mp4";
+          video.appendChild(src);
           div.appendChild(video);
         } else {
-          const img = document.createElement("img");
-          img.className = "media";
-          img.src = jpg;
-          img.alt = `Item ${i}`;
-          div.appendChild(img);
+          createImageSlideshow(base, div, i);
         }
 
         const desc = document.createElement("p");
