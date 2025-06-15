@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>New Arrivals | Essence Finds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <style>
     :root {
       --accent: #C89B3C;
@@ -12,15 +13,17 @@
       --dark: #1B1B1B;
     }
     * {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', Arial, sans-serif;
     }
     body {
       background: var(--light);
       color: var(--dark);
-      padding: 40px 20px 60px;
+      min-height: 100vh;
       text-align: center;
+      padding: 40px 20px 60px;
     }
     h1 {
       font-size: 2.5rem;
@@ -47,14 +50,25 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       padding: 15px;
     }
-    .media {
+    .item img {
       width: 100%;
       border-radius: 8px;
-      display: block;
+      margin-bottom: 10px;
     }
     .desc {
       font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .np {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.4;
+    }
+    .price {
       margin-top: 10px;
+      font-weight: bold;
+      color: var(--accent);
     }
     .back {
       display: inline-block;
@@ -83,105 +97,61 @@
   <h1>New Arrivals</h1>
   <div class="gold-line"></div>
 
-  <div class="grid" id="gallery"></div>
-  <audio id="bgmusic" hidden></audio>
+  <div class="grid">
+    <!-- ITEM 11 to 17 -->
+    <!-- You can duplicate and change details as needed -->
+
+    <div class="item">
+      <img src="11.jpg" alt="New Arrival 11">
+      <p class="desc">Elegant premium kurti set, breathable cotton fabric.</p>
+      <p class="np">नयाँ डिजाइनको कटन कुर्ती सेट, विशेष कटन कपडा।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="12.jpg" alt="New Arrival 12">
+      <p class="desc">Summer-ready style with soft material and free-size fitting.</p>
+      <p class="np">सजिलो र आरामदायी, न्यानो मौसमका लागि उपयुक्त।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="13.jpg" alt="New Arrival 13">
+      <p class="desc">Stylish ethnic wear with embroidery detail.</p>
+      <p class="np">राम्रो कढाई सहितको पारम्परिक डिजाइन।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="14.jpg" alt="New Arrival 14">
+      <p class="desc">Bright festive look with vibrant colors and flowing fabric.</p>
+      <p class="np">रङ्गीन र सौन्दर्यले भरिएको डिजाइन।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="15.jpg" alt="New Arrival 15">
+      <p class="desc">Trendy outfit with high-quality stitching and soft touch.</p>
+      <p class="np">नयाँ फेसनअनुसार, उच्च गुणस्तरको कपडा।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="16.jpg" alt="New Arrival 16">
+      <p class="desc">Modern design inspired by traditional textures.</p>
+      <p class="np">परम्परागत बनावटमा आधारित आधुनिक लुगा।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+    <div class="item">
+      <img src="17.jpg" alt="New Arrival 17">
+      <p class="desc">Graceful wear with comfort-fit fabric and classic cuts.</p>
+      <p class="np">सजिलो र सान्त्वनादायी, सबै उमेर समूहका लागि उपयुक्त।</p>
+      <p class="price">Contact for Price</p>
+    </div>
+
+  </div>
+
   <a class="back" href="/index.html">← Back to Home</a>
-
-  <script>
-    const items = [
-      '1 (1)', '1 (2)', '1 (3)', '1 (4)', '1 (5)', '1 (6)', '1 (7)',
-      '1 (8)', '1 (9)', '1 (10)', '1 (11)', '1 (12)', '1 (13)',
-      '1 (a1)', '1 (a2)', '1 (a3)', '1 (a4)', '1 (a5)', '1 (a6)'
-    ];
-
-    const gallery = document.getElementById("gallery");
-    const musicTracks = [
-      'music1.mp3', 'music2.mp3', 'music3.mp3' // add more if you have
-    ];
-    const bgMusic = document.getElementById("bgmusic");
-
-    function fileExists(url, callback) {
-      const xhr = new XMLHttpRequest();
-      xhr.open('HEAD', url);
-      xhr.onload = () => callback(xhr.status >= 200 && xhr.status < 400);
-      xhr.onerror = () => callback(false);
-      xhr.send();
-    }
-
-    function playRandomMusic() {
-      const track = musicTracks[Math.floor(Math.random() * musicTracks.length)];
-      bgMusic.src = track;
-      bgMusic.loop = false;
-      bgMusic.volume = 0.5;
-      bgMusic.play();
-      setTimeout(() => bgMusic.pause(), 30000); // stop after 30 sec
-    }
-
-    function createImageSlideshow(baseName, div, label) {
-      const img = document.createElement("img");
-      img.className = "media";
-      img.alt = label;
-      div.appendChild(img);
-
-      const frames = [];
-      let checked = 0;
-
-      for (let j = 1; j <= 3; j++) {
-        const url = `${baseName}_${j}.jpg`;
-        fileExists(url, exists => {
-          if (exists) frames.push(url);
-          checked++;
-          if (checked === 3) {
-            if (frames.length > 0) {
-              let current = 0;
-              img.src = frames[0];
-              setInterval(() => {
-                current = (current + 1) % frames.length;
-                img.src = frames[current];
-              }, 3000);
-            } else {
-              const fallback = baseName + '.jpg';
-              img.src = fallback;
-            }
-            playRandomMusic();
-          }
-        });
-      }
-    }
-
-    items.forEach((label, index) => {
-      const base = encodeURIComponent(label).replace(/%20/g, ' ');
-      const baseFile = label.replace(/ /g, '%20');
-      const mp4 = `${baseFile}.mp4`;
-
-      const div = document.createElement("div");
-      div.className = "item";
-
-      fileExists(mp4, hasVideo => {
-        if (hasVideo) {
-          const video = document.createElement("video");
-          video.className = "media";
-          video.autoplay = true;
-          video.loop = true;
-          video.controls = true;
-          video.playsInline = true;
-          const src = document.createElement("source");
-          src.src = mp4;
-          src.type = "video/mp4";
-          video.appendChild(src);
-          div.appendChild(video);
-        } else {
-          createImageSlideshow(baseFile, div, label);
-        }
-
-        const desc = document.createElement("p");
-        desc.className = "desc";
-        desc.innerText = `New ${label}`;
-        div.appendChild(desc);
-
-        gallery.appendChild(div);
-      });
-    });
-  </script>
 </body>
 </html>
